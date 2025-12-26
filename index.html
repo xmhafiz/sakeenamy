@@ -128,41 +128,50 @@
                   <div class="space-y-2 py-6">
                     <a
                       href="#home"
+                      command="close"
+                      commandfor="mobile-menu"
                       class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
                       >Utama</a
                     >
                     <a
                       href="#about"
+                      command="close"
+                      commandfor="mobile-menu"
                       class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
                       >Tentang Kami</a
                     >
                     <a
                       href="#vision"
+                      command="close"
+                      commandfor="mobile-menu"
                       class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
                       >Visi & Misi</a
                     >
                     <a
-                      href="#stats"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
-                      >Statistik</a
-                    >
-                    <a
                       href="#gallery"
+                      command="close"
+                      commandfor="mobile-menu"
                       class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
                       >Galeri</a
                     >
                     <a
                       href="#team"
+                      command="close"
+                      commandfor="mobile-menu"
                       class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
                       >Pasukan kami</a
                     >
                     <a
                       href="#programs"
+                      command="close"
+                      commandfor="mobile-menu"
                       class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
                       >Program</a
                     >
                     <a
                       href="#contact"
+                      command="close"
+                      commandfor="mobile-menu"
                       class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
                       >Hubungi</a
                     >
@@ -1021,5 +1030,44 @@
         </p>
       </div>
     </footer>
+    <script>
+      // Mobile menu functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuToggle = document.querySelector('[commandfor="mobile-menu"][command="show-modal"]');
+        const closeButton = document.querySelector('[commandfor="mobile-menu"][command="close"]');
+        const navLinks = document.querySelectorAll('#mobile-menu a[href^="#"]');
+
+        // Open mobile menu
+        if (menuToggle) {
+          menuToggle.addEventListener('click', function() {
+            mobileMenu.showModal();
+          });
+        }
+
+        // Close mobile menu
+        if (closeButton) {
+          closeButton.addEventListener('click', function() {
+            mobileMenu.close();
+          });
+        }
+
+        // Close mobile menu when clicking navigation links
+        navLinks.forEach(function(link) {
+          link.addEventListener('click', function() {
+            mobileMenu.close();
+          });
+        });
+
+        // Close mobile menu when clicking outside
+        if (mobileMenu) {
+          mobileMenu.addEventListener('click', function(e) {
+            if (e.target === mobileMenu) {
+              mobileMenu.close();
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>
