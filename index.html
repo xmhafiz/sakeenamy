@@ -3,1070 +3,1454 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="favicon.png" type="image/x-icon" />
+    <title>Sakeena Global - Pusat Pembelajaran Al-Quran</title>
     <style>
       :root {
-        scroll-behavior: smooth;
+        --green-950: #052e16;
+        --green-900: #064e3b;
+        --green-700: #047857;
+        --green-500: #10b981;
+        --green-400: #34d399;
+        --green-50:  #f0fdf4;
+        --neutral-950: #0a0a0a;
+        --neutral-900: #171717;
+        --neutral-800: #262626;
+        --neutral-600: #525252;
+        --neutral-400: #a3a3a3;
+        --neutral-200: #e5e5e5;
+        --neutral-100: #f5f5f5;
+        --white: #ffffff;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: 'Outfit', sans-serif;
+        background: var(--white);
+        color: var(--neutral-950);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.6;
+      }
+
+      /* ── Scroll reveal ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.65s cubic-bezier(.16,1,.3,1), transform 0.65s cubic-bezier(.16,1,.3,1);
+      }
+      .reveal.in { opacity: 1; transform: none; }
+      .d1 { transition-delay: 0.08s; }
+      .d2 { transition-delay: 0.16s; }
+      .d3 { transition-delay: 0.24s; }
+      .d4 { transition-delay: 0.32s; }
+
+      /* ── NAV ── */
+      .site-nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255,255,255,0.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--neutral-200);
+      }
+
+      .nav-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 32px;
+        height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .nav-links { display: flex; align-items: center; gap: 4px; }
+
+      .nav-link {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--neutral-600);
+        text-decoration: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        transition: color 0.2s, background 0.2s;
+        letter-spacing: 0.01em;
+      }
+      .nav-link:hover { color: var(--neutral-950); background: var(--neutral-100); }
+
+      .btn-nav {
+        font-family: 'Outfit', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--white);
+        background: var(--green-900);
+        padding: 9px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s;
+        white-space: nowrap;
+      }
+      .btn-nav:hover { background: var(--green-700); transform: translateY(-1px); }
+
+      .hamburger {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        color: var(--neutral-600);
+        display: none;
+      }
+      @media (max-width: 1024px) {
+        .nav-links { display: none; }
+        .hamburger { display: flex; }
+        .btn-nav-desktop { display: none; }
+      }
+
+      /* ── MOBILE MENU ── */
+      #mobile-menu {
+        border: none; padding: 0;
+        width: 100%; max-width: 100%;
+        height: 100%; max-height: 100%;
+        background: transparent;
+      }
+      #mobile-menu::backdrop { background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+
+      .mobile-panel {
+        position: fixed;
+        top: 0; right: 0; bottom: 0;
+        width: min(320px, 85vw);
+        background: var(--white);
+        padding: 24px;
+        overflow-y: auto;
+        border-left: 1px solid var(--neutral-200);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .mobile-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+
+      .mobile-nav-link {
+        display: block;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--neutral-800);
+        text-decoration: none;
+        padding: 13px 16px;
+        border-radius: 10px;
+        transition: background 0.15s, color 0.15s;
+      }
+      .mobile-nav-link:hover { background: var(--green-50); color: var(--green-900); }
+
+      /* ── HERO ── */
+      .hero {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 80px 24px;
+      }
+
+      .hero-img {
+        position: absolute;
+        inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(160deg, rgba(5,46,22,0.88) 0%, rgba(5,46,22,0.72) 50%, rgba(5,46,22,0.9) 100%);
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 760px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(16,185,129,0.15);
+        border: 1px solid rgba(52,211,153,0.35);
+        color: var(--green-400);
+        font-size: 12.5px;
+        font-weight: 600;
+        padding: 6px 14px;
+        border-radius: 100px;
+        margin-bottom: 28px;
+        letter-spacing: 0.03em;
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+      .hero-chip:hover { background: rgba(16,185,129,0.25); }
+      @media (max-width: 640px) {
+        .hero-chip {
+          flex-direction: column;
+          align-items: center;
+          border-radius: 16px;
+          gap: 4px;
+          padding: 10px 16px;
+          text-align: center;
+        }
+        .hero-chip-dot { display: none; }
+      }
+      .hero-chip-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: var(--green-400);
+        animation: blink 1.8s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+
+      .hero-title {
+        font-size: clamp(44px, 8vw, 80px);
+        font-weight: 800;
+        line-height: 1.06;
+        letter-spacing: -0.03em;
+        color: var(--white);
+        margin-bottom: 24px;
+      }
+
+      .hero-title span {
+        color: var(--green-400);
+      }
+
+      .hero-hadith {
+        font-size: clamp(14px, 2vw, 17px);
+        font-weight: 400;
+        color: rgba(255,255,255,0.6);
+        max-width: 500px;
+        margin: 0 auto 36px;
+        line-height: 1.7;
+        font-style: italic;
+      }
+
+      .hero-actions { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+      .btn-primary {
+        font-family: 'Outfit', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--white);
+        background: var(--green-700);
+        padding: 13px 28px;
+        border-radius: 10px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        letter-spacing: 0.01em;
+      }
+      .btn-primary:hover {
+        background: var(--green-500);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(16,185,129,0.35);
+      }
+
+      .btn-outline {
+        font-family: 'Outfit', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.75);
+        background: transparent;
+        padding: 13px 28px;
+        border-radius: 10px;
+        text-decoration: none;
+        border: 1px solid rgba(255,255,255,0.2);
+        transition: border-color 0.2s, color 0.2s, background 0.2s;
+        letter-spacing: 0.01em;
+      }
+      .btn-outline:hover { border-color: rgba(255,255,255,0.5); color: white; background: rgba(255,255,255,0.06); }
+
+      /* ── SECTION WRAPPER ── */
+      .section { padding: 96px 24px; }
+      .section-sm { padding: 72px 24px; }
+      .container { max-width: 1280px; margin: 0 auto; }
+      .container-md { max-width: 960px; margin: 0 auto; }
+
+      /* ── EYEBROW LABEL ── */
+      .eyebrow {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--green-700);
+        margin-bottom: 10px;
+      }
+
+      /* ── SECTION HEADING ── */
+      .section-heading {
+        font-size: clamp(28px, 4vw, 44px);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        line-height: 1.12;
+        color: var(--neutral-950);
+        margin-bottom: 16px;
+      }
+
+      .section-sub {
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--neutral-600);
+        line-height: 1.7;
+        max-width: 560px;
+      }
+
+      /* ── ABOUT ── */
+      .about-section { background: var(--white); }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+      @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+      .feature-row {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--neutral-100);
+      }
+      .feature-row:last-child { border-bottom: none; }
+
+      .feat-icon {
+        width: 40px; height: 40px; flex-shrink: 0;
+        background: var(--green-50);
+        border-radius: 10px;
+        display: flex; align-items: center; justify-content: center;
+        margin-top: 2px;
+        transition: background 0.2s;
+      }
+      .feature-row:hover .feat-icon { background: #d1fae5; }
+
+      .feat-title { font-size: 15px; font-weight: 600; color: var(--neutral-950); margin-bottom: 4px; }
+      .feat-desc { font-size: 14px; font-weight: 400; color: var(--neutral-600); line-height: 1.6; }
+
+      .about-image {
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 24px 64px rgba(0,0,0,0.1);
+      }
+      .about-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .about-image-badge {
+        position: absolute;
+        bottom: 20px; left: 20px;
+        background: var(--white);
+        border-radius: 12px;
+        padding: 14px 18px;
+        display: flex; align-items: center; gap: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      }
+      .badge-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green-500); flex-shrink: 0; }
+      .badge-text { font-size: 13px; font-weight: 600; color: var(--neutral-800); }
+
+      /* ── VISION ── */
+      .vision-section { background: var(--neutral-950); }
+
+      .vision-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        background: var(--neutral-800);
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 56px;
+      }
+      @media (max-width: 800px) { .vision-grid { grid-template-columns: 1fr; } }
+
+      .vision-card {
+        background: var(--neutral-900);
+        padding: 40px 36px;
+        transition: background 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .vision-card:hover { background: #111111; }
+      .vision-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--green-500), transparent);
+        opacity: 0;
+        transition: opacity 0.35s;
+      }
+      .vision-card:hover::before { opacity: 1; }
+
+      .vision-icon {
+        width: 48px; height: 48px;
+        background: rgba(16,185,129,0.1);
+        border: 1px solid rgba(16,185,129,0.2);
+        border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .vision-title { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 12px; letter-spacing: -0.01em; }
+      .vision-desc { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+      /* section heading light variant */
+      .section-heading-light { color: var(--white); }
+      .eyebrow-light { color: var(--green-400); }
+      .section-sub-light { color: rgba(255,255,255,0.45); }
+
+      /* ── GALLERY ── */
+      .gallery-section { background: var(--neutral-100); }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        margin-top: 48px;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      @media (max-width: 1024px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
+      @media (max-width: 640px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+
+      .gallery-item {
+        aspect-ratio: 1;
+        overflow: hidden;
+        position: relative;
+      }
+      .gallery-item img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s cubic-bezier(.16,1,.3,1);
+      }
+      .gallery-item::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: rgba(5,46,22,0.5);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .gallery-item { cursor: zoom-in; }
+      .gallery-item:hover img { transform: scale(1.08); }
+      .gallery-item:hover::after { opacity: 1; }
+
+      /* ── LIGHTBOX ── */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .lightbox.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .lightbox-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.92);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .lightbox-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 60px 80px;
+      }
+      @media (max-width: 640px) { .lightbox-content { padding: 60px 16px; } }
+
+      .lightbox-img-wrap {
+        position: relative;
+        max-width: 100%;
+        max-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .lightbox-img {
+        max-width: min(90vw, 1000px);
+        max-height: 85vh;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+        transform: scale(0.92);
+        transition: transform 0.3s cubic-bezier(.16,1,.3,1), opacity 0.3s ease;
+        opacity: 0;
+        display: block;
+      }
+      .lightbox.open .lightbox-img {
+        transform: scale(1);
+        opacity: 1;
+      }
+      .lightbox-img.switching {
+        transform: scale(0.94);
+        opacity: 0;
+      }
+
+      /* Counter */
+      .lightbox-counter {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        color: rgba(255,255,255,0.35);
+      }
+
+      /* Close button */
+      .lightbox-close {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.15);
+        color: rgba(255,255,255,0.7);
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+        z-index: 2;
+      }
+      .lightbox-close:hover { background: rgba(255,255,255,0.2); color: white; }
+
+      /* Nav buttons */
+      .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px; height: 48px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.15);
+        color: rgba(255,255,255,0.7);
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, transform 0.2s;
+        z-index: 2;
+      }
+      .lightbox-nav:hover { background: rgba(255,255,255,0.2); color: white; }
+      .lightbox-nav.prev { left: 16px; }
+      .lightbox-nav.next { right: 16px; }
+      .lightbox-nav:hover.prev { transform: translateY(-50%) translateX(-2px); }
+      .lightbox-nav:hover.next { transform: translateY(-50%) translateX(2px); }
+      @media (max-width: 640px) {
+        .lightbox-nav { width: 38px; height: 38px; }
+        .lightbox-nav.prev { left: 8px; }
+        .lightbox-nav.next { right: 8px; }
+      }
+
+      /* Thumbnail strip */
+      .lightbox-thumbs {
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+        max-width: calc(100vw - 120px);
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 4px;
+      }
+      .lightbox-thumbs::-webkit-scrollbar { display: none; }
+      .lightbox-thumb {
+        width: 44px; height: 44px;
+        border-radius: 6px;
+        object-fit: cover;
+        opacity: 0.4;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: opacity 0.2s, border-color 0.2s, transform 0.2s;
+        flex-shrink: 0;
+      }
+      .lightbox-thumb.active {
+        opacity: 1;
+        border-color: var(--green-400);
+        transform: scale(1.1);
+      }
+      .lightbox-thumb:hover { opacity: 0.8; }
+
+      /* ── TEAM ── */
+      .team-section { background: var(--white); }
+
+      .team-header-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 80px;
+        align-items: end;
+        margin-bottom: 64px;
+      }
+      @media (max-width: 900px) { .team-header-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+      .team-tagline {
+        font-size: clamp(24px, 3.5vw, 38px);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        color: var(--neutral-300, #d4d4d4);
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+      }
+      @media (max-width: 900px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 480px) { .team-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+
+      .team-card { text-align: center; }
+
+      .team-photo-wrap {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 16px;
+      }
+      .team-photo {
+        width: 160px; height: 160px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        border: 3px solid var(--white);
+        box-shadow: 0 0 0 2px var(--green-500), 0 8px 28px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s, transform 0.3s;
+      }
+      .team-card:hover .team-photo {
+        box-shadow: 0 0 0 3px var(--green-400), 0 12px 36px rgba(16,185,129,0.2);
+        transform: translateY(-4px);
+      }
+
+      .team-name { font-size: 16px; font-weight: 700; color: var(--neutral-950); letter-spacing: -0.01em; }
+      .team-role {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--green-700);
+        margin-top: 5px;
+      }
+
+      /* ── PROGRAMS ── */
+      .programs-section { background: var(--green-50); }
+
+      .programs-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 56px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      @media (max-width: 700px) { .programs-grid { grid-template-columns: 1fr; } }
+
+      .program-card {
+        background: var(--white);
+        border-radius: 16px;
+        padding: 32px 28px;
+        border: 1px solid rgba(16,185,129,0.1);
+        transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+        position: relative;
+        overflow: hidden;
+      }
+      .program-card:hover {
+        border-color: rgba(16,185,129,0.35);
+        box-shadow: 0 12px 40px rgba(16,185,129,0.1);
+        transform: translateY(-3px);
+      }
+
+      .program-num {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: var(--green-500);
+        margin-bottom: 16px;
+      }
+
+      .program-icon-wrap {
+        width: 48px; height: 48px;
+        background: var(--green-900);
+        border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 16px;
+        transition: background 0.2s;
+      }
+      .program-card:hover .program-icon-wrap { background: var(--green-700); }
+
+      .program-title { font-size: 17px; font-weight: 700; color: var(--neutral-950); margin-bottom: 8px; letter-spacing: -0.01em; }
+      .program-desc { font-size: 14px; font-weight: 400; color: var(--neutral-600); line-height: 1.65; }
+
+      /* ── TADABBUR ── */
+      .tadabbur-section { background: var(--white); }
+
+      .tadabbur-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+      @media (max-width: 900px) { .tadabbur-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+      .quote-pill {
+        display: inline-block;
+        background: var(--green-50);
+        border-left: 3px solid var(--green-500);
+        border-radius: 0 10px 10px 0;
+        padding: 16px 20px;
+        font-size: 15px;
+        font-style: italic;
+        font-weight: 400;
+        color: var(--neutral-700, #404040);
+        line-height: 1.7;
+        margin: 20px 0 28px;
+      }
+      .quote-source {
+        display: block;
+        font-style: normal;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--green-700);
+        margin-top: 8px;
+      }
+
+      .detail-row {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 18px 0;
+        border-bottom: 1px solid var(--neutral-100);
+      }
+      .detail-row:last-child { border-bottom: none; }
+
+      .detail-icon-box {
+        width: 40px; height: 40px; flex-shrink: 0;
+        background: var(--green-50);
+        border-radius: 10px;
+        display: flex; align-items: center; justify-content: center;
+      }
+
+      .detail-title { font-size: 15px; font-weight: 600; color: var(--neutral-950); margin-bottom: 4px; }
+      .detail-desc { font-size: 14px; color: var(--neutral-600); line-height: 1.6; }
+
+      .tad-image {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 24px 64px rgba(0,0,0,0.1);
+      }
+      .tad-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+      /* ── CONTACT ── */
+      .contact-section {
+        background: var(--green-950);
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-section::before {
+        content: '';
+        position: absolute;
+        top: -300px; right: -300px;
+        width: 700px; height: 700px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 65%);
+        pointer-events: none;
+      }
+      .contact-section::after {
+        content: '';
+        position: absolute;
+        bottom: -200px; left: -100px;
+        width: 500px; height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 65%);
+        pointer-events: none;
+      }
+
+      .contact-inner { position: relative; z-index: 1; }
+
+      .contact-logo { height: 48px; width: auto; margin-bottom: 36px; opacity: 0.9; }
+
+      .contact-title {
+        font-size: clamp(40px, 7vw, 80px);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 1.0;
+        color: var(--white);
+        margin-bottom: 20px;
+      }
+
+      .contact-sub {
+        font-size: 16px;
+        font-weight: 400;
+        color: rgba(255,255,255,0.45);
+        line-height: 1.7;
+        max-width: 480px;
+        margin-bottom: 40px;
+      }
+
+      .contact-links { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 64px; }
+
+      .contact-btn {
+        font-family: 'Outfit', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: all 0.2s;
+        letter-spacing: 0.02em;
+      }
+      .contact-btn-primary {
+        background: var(--green-700);
+        color: var(--white);
+      }
+      .contact-btn-primary:hover { background: var(--green-500); }
+      .contact-btn-ghost {
+        background: rgba(255,255,255,0.07);
+        color: rgba(255,255,255,0.65);
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+      .contact-btn-ghost:hover { background: rgba(255,255,255,0.12); color: var(--white); }
+
+      .contact-divider { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 48px; }
+
+      .contact-info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+      }
+      @media (max-width: 700px) { .contact-info-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+      .info-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.3);
+        margin-bottom: 8px;
+      }
+      .info-value {
+        font-size: 15px;
+        font-weight: 500;
+        color: rgba(255,255,255,0.85);
+        line-height: 1.5;
+      }
+
+      /* ── FOOTER ── */
+      .site-footer {
+        background: var(--neutral-950);
+        padding: 24px 32px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 400;
+        color: rgba(255,255,255,0.25);
+        border-top: 1px solid rgba(255,255,255,0.05);
       }
     </style>
-    <title>Sakeena Global - Pusat Pembelajaran Al-Quran</title>
   </head>
-  <body class="bg-white text-gray-900">
-    <header
-      class="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 border-b border-gray-200"
-    >
-      <nav
-        aria-label="Global"
-        class="flex items-center justify-between p-6 lg:px-8"
-      >
-        <div class="flex lg:flex-1">
-          <a href="#home" class="-m-1.5 p-1.5">
-            <img
-              src="/public/main/logo.png"
-              alt="Sakeena Global"
-              class="h-12 w-auto"
-            />
-          </a>
-        </div>
-        <div class="flex lg:hidden">
+  <body>
+
+    <!-- ════════════════════ NAV ════════════════════ -->
+    <header class="site-nav">
+      <div class="nav-inner">
+        <a href="#home">
+          <img src="/public/main/logo.png" alt="Sakeena Global" style="height:40px; width:auto; display:block;" />
+        </a>
+
+        <nav class="nav-links" aria-label="Global">
+          <a href="#home" class="nav-link">Utama</a>
+          <a href="#about" class="nav-link">Tentang Kami</a>
+          <a href="#vision" class="nav-link">Visi &amp; Misi</a>
+          <a href="#gallery" class="nav-link">Galeri</a>
+          <a href="#team" class="nav-link">Pasukan kami</a>
+          <a href="#programs" class="nav-link">Program</a>
+          <a href="#contact" class="nav-link">Hubungi</a>
+        </nav>
+
+        <div style="display:flex; align-items:center; gap:12px;">
+          <a href="https://wa.me/601155593755" class="btn-nav btn-nav-desktop">WhatsApp</a>
           <button
             type="button"
             command="show-modal"
             commandfor="mobile-menu"
-            class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            class="hamburger"
+            aria-label="Buka menu"
           >
-            <span class="sr-only">Buka menu</span>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              data-slot="icon"
-              aria-hidden="true"
-              class="size-6"
-            >
-              <path
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
             </svg>
           </button>
         </div>
-        <div class="hidden lg:flex lg:gap-x-8">
-          <a href="#home" class="text-sm/6 font-semibold text-gray-900"
-            >Utama</a
-          >
-          <a href="#about" class="text-sm/6 font-semibold text-gray-900"
-            >Tentang Kami</a
-          >
-          <a href="#vision" class="text-sm/6 font-semibold text-gray-900"
-            >Visi & Misi</a
-          >
-          <a href="#gallery" class="text-sm/6 font-semibold text-gray-900"
-            >Galeri</a
-          >
-          <a href="#team" class="text-sm/6 font-semibold text-gray-900"
-            >Pasukan kami</a
-          >
-          <a href="#programs" class="text-sm/6 font-semibold text-gray-900"
-            >Program</a
-          >
-          <a href="#contact" class="text-sm/6 font-semibold text-gray-900"
-            >Hubungi</a
-          >
-        </div>
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a
-            href="https://wa.me/601155593755"
-            class="rounded-md bg-emerald-500 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-600"
-            >WhatsApp</a
-          >
-        </div>
-      </nav>
-      <el-dialog>
-        <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
-          <div tabindex="0" class="fixed inset-0 focus:outline-none">
-            <el-dialog-panel
-              class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
-            >
-              <div class="flex items-center justify-between">
-                <a href="#home" class="-m-1.5 p-1.5">
-                  <img
-                    src="/public/main/logo.png"
-                    alt="Sakeena Global"
-                    class="h-10 w-auto"
-                  />
-                </a>
-                <button
-                  type="button"
-                  command="close"
-                  commandfor="mobile-menu"
-                  class="-m-2.5 rounded-md p-2.5 text-gray-700"
-                >
-                  <span class="sr-only">Tutup menu</span>
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    data-slot="icon"
-                    aria-hidden="true"
-                    class="size-6"
-                  >
-                    <path
-                      d="M6 18 18 6M6 6l12 12"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
+      </div>
+    </header>
+
+    <!-- Mobile dialog -->
+    <el-dialog>
+      <dialog id="mobile-menu">
+        <div tabindex="0" style="position:fixed;inset:0;focus:outline-none;">
+          <el-dialog-panel>
+            <div class="mobile-panel">
+              <div class="mobile-header">
+                <img src="/public/main/logo.png" alt="Sakeena Global" style="height:36px; width:auto;" />
+                <button type="button" command="close" commandfor="mobile-menu" style="background:none;border:none;cursor:pointer;padding:8px;color:#525252;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
                 </button>
               </div>
-              <div class="mt-6 flow-root">
-                <div class="-my-6 divide-y divide-gray-500/10">
-                  <div class="space-y-2 py-6">
-                    <a
-                      href="#home"
-                      command="close"
-                      commandfor="mobile-menu"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
-                      >Utama</a
-                    >
-                    <a
-                      href="#about"
-                      command="close"
-                      commandfor="mobile-menu"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
-                      >Tentang Kami</a
-                    >
-                    <a
-                      href="#vision"
-                      command="close"
-                      commandfor="mobile-menu"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
-                      >Visi & Misi</a
-                    >
-                    <a
-                      href="#gallery"
-                      command="close"
-                      commandfor="mobile-menu"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
-                      >Galeri</a
-                    >
-                    <a
-                      href="#team"
-                      command="close"
-                      commandfor="mobile-menu"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
-                      >Pasukan kami</a
-                    >
-                    <a
-                      href="#programs"
-                      command="close"
-                      commandfor="mobile-menu"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
-                      >Program</a
-                    >
-                    <a
-                      href="#contact"
-                      command="close"
-                      commandfor="mobile-menu"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-100"
-                      >Hubungi</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </el-dialog-panel>
-          </div>
-        </dialog>
-      </el-dialog>
-    </header>
-
-    <div class="bg-white" id="home">
-      <div class="relative isolate px-6 pt-14 lg:px-8">
-        <img
-          src="/public/main/01.jpg"
-          alt=""
-          class="absolute inset-0 -z-10 size-full object-cover"
-        />
-        <div
-          class="absolute inset-0 -z-10"
-          style="background-color: rgba(25, 30, 48, 0.75)"
-        ></div>
-        <div
-          aria-hidden="true"
-          class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-        ></div>
-        <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-64">
-          <div class="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div
-              class="relative rounded-full px-3 py-1 text-sm/6 text-gray-200 ring-1 ring-emerald-500/50 hover:ring-emerald-400"
-            >
-              Pengambilan Kelas Online 2026 kini dibuka untuk pendaftaran.
-              <a href="#contact" class="font-semibold text-emerald-400"
-                ><span aria-hidden="true" class="absolute inset-0"></span>Daftar
-                Sekarang <span aria-hidden="true">&rarr;</span></a
-              >
-            </div>
-          </div>
-          <div class="text-center">
-            <h1
-              class="text-5xl font-bold text-balance text-gray-50 sm:text-6xl"
-            >
-              When Joy Meets The Quran
-            </h1>
-            <p
-              class="mt-8 text-lg font-medium text-pretty text-gray-200 sm:text-xl/8"
-            >
-              "Sebaik-baik kamu ialah yang mempelajari Al-Quran dan
-              mengajarkannya" (Riwayat al-Bukhari 5027)
-            </p>
-            <div class="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="https://wa.me/601155593755"
-                class="rounded-md bg-emerald-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-emerald-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
-                >Hubungi Kami</a
-              >
-              <a href="#programs" class="text-sm/6 font-semibold text-gray-200"
-                >Lihat Program <span aria-hidden="true">→</span></a
-              >
-            </div>
-          </div>
-        </div>
-        <div
-          aria-hidden="true"
-          class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-        >
-          <div
-            style="
-              clip-path: polygon(
-                74.1% 44.1%,
-                100% 61.6%,
-                97.5% 26.9%,
-                85.5% 0.1%,
-                80.7% 2%,
-                72.5% 32.5%,
-                60.2% 62.4%,
-                52.4% 68.1%,
-                47.5% 58.3%,
-                45.2% 34.5%,
-                27.5% 76.7%,
-                0.1% 64.9%,
-                17.9% 100%,
-                27.6% 76.8%,
-                76.1% 97.7%,
-                74.1% 44.1%
-              );
-            "
-            class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-emerald-400 to-emerald-600 opacity-20 sm:left-[calc(50%+36rem)] sm:w-288.75"
-          ></div>
-        </div>
-      </div>
-    </div>
-    <div class="overflow-hidden bg-gray-50 py-24 sm:py-32" id="about">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div
-          class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2"
-        >
-          <div class="lg:pt-4 lg:pr-8">
-            <div class="lg:max-w-lg">
-              <h2 class="text-lg/7 font-semibold text-emerald-600">
-                Mengapa Pilih Kami
-              </h2>
-              <p
-                class="mt-2 text-4xl font-bold tracking-tight text-pretty sm:text-5xl"
-                style="color: #191e30"
-              >
-                Pendidikan Al-Quran Berkualiti
-              </p>
-              <p class="mt-6 text-xl/8 text-gray-700">
-                Kami menawarkan pendidikan Al-Quran yang komprehensif untuk
-                kanak-kanak dan dewasa melalui kaedah yang sistematik dan
-                kondusif.
-              </p>
-              <dl
-                class="mt-10 max-w-xl space-y-8 text-lg/7 text-gray-600 lg:max-w-none"
-              >
-                <div class="relative pl-9">
-                  <dt class="inline font-semibold text-gray-900">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      data-slot="icon"
-                      aria-hidden="true"
-                      class="absolute top-1 left-1 size-5 text-emerald-600"
-                    >
-                      <path
-                        d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    Mesra Kanak-Kanak.
-                  </dt>
-                  <dd class="inline">
-                    Suasana pembelajaran yang mesra dan selesa untuk kanak-kanak
-                    dengan pendekatan yang menarik minat.
-                  </dd>
-                </div>
-                <div class="relative pl-9">
-                  <dt class="inline font-semibold text-gray-900">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      data-slot="icon"
-                      aria-hidden="true"
-                      class="absolute top-1 left-1 size-5 text-emerald-600"
-                    >
-                      <path
-                        d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    Guru Terlatih.
-                  </dt>
-                  <dd class="inline">
-                    Tenaga pengajar terlatih dan berpengalaman dalam pendidikan
-                    Al-Quran dengan metod pengajaran yang berkesan.
-                  </dd>
-                </div>
-                <div class="relative pl-9">
-                  <dt class="inline font-semibold text-gray-900">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      data-slot="icon"
-                      aria-hidden="true"
-                      class="absolute top-1 left-1 size-5 text-emerald-600"
-                    >
-                      <path
-                        d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    Pembelajaran Sistematik.
-                  </dt>
-                  <dd class="inline">
-                    Kurikulum tersusun dengan baik dan pembelajaran yang
-                    kondusif untuk memastikan perkembangan pelajar yang
-                    konsisten.
-                  </dd>
-                </div>
-              </dl>
-            </div>
-          </div>
-          <img
-            src="/public/main/02.png"
-            alt="Suasana pembelajaran"
-            class="h-full w-full object-cover rounded-xl shadow-xl ring-1 ring-gray-200"
-          />
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="relative isolate overflow-hidden py-24 sm:py-32"
-      style="background-color: #191e30"
-      id="vision"
-    >
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:text-center">
-          <h2 class="text-lg/7 font-semibold text-emerald-400">Visi & Misi</h2>
-          <p
-            class="mt-2 text-4xl font-bold tracking-tight text-pretty sm:text-5xl text-gray-100"
-          >
-            Matlamat Kami
-          </p>
-        </div>
-        <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <dl
-            class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3"
-          >
-            <div class="flex flex-col">
-              <dt
-                class="flex items-center gap-x-3 text-lg/7 font-semibold text-gray-100"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  class="size-10 flex-none text-emerald-400"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                Guru
-              </dt>
-              <dd class="mt-4 flex flex-auto flex-col text-lg/7 text-gray-300">
-                <p class="flex-auto">
-                  Menjadi platform bagi Ahlul Quran berkhidmat dan berkembang
-                  melalui latihan, kemahiran dan pembangunan peribadi yang
-                  berterusan.
-                </p>
-              </dd>
-            </div>
-            <div class="flex flex-col">
-              <dt
-                class="flex items-center gap-x-3 text-lg/7 font-semibold text-gray-100"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  class="size-10 flex-none text-emerald-400"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                Komuniti
-              </dt>
-              <dd class="mt-4 flex flex-auto flex-col text-lg/7 text-gray-300">
-                <p class="flex-auto">
-                  Memperkukuh institusi kekeluargaan dan membina masyarakat
-                  berakhlak berpandukan petunjuk Al-Quran.
-                </p>
-              </dd>
-            </div>
-            <div class="flex flex-col">
-              <dt
-                class="flex items-center gap-x-3 text-lg/7 font-semibold text-gray-100"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  class="size-10 flex-none text-emerald-400"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                Pembelajaran
-              </dt>
-              <dd class="mt-4 flex flex-auto flex-col text-lg/7 text-gray-300">
-                <p class="flex-auto">
-                  Menyediakan sistem pembelajaran Al-Quran yang menyeronokkan,
-                  tersusun dan berasaskan nilai — agar anak-anak membesar dengan
-                  cinta kepada Al-Quran serta membawa ketenangan (sakeenah)
-                  dalam diri, keluarga dan komuniti.
-                </p>
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </div>
-    <div class="bg-gray-50 py-24 sm:py-32" id="gallery">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <h2
-          class="text-center text-3xl font-bold tracking-tight sm:text-4xl mb-12"
-          style="color: #191e30"
-        >
-          Galeri Kami
-        </h2>
-        <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/1.JPG"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/2.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/3.JPG"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/4.JPG"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/5.JPG"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/6.JPG"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/7.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/8.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/9.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/10.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/11.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/12.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/13.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/14.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/15.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/16.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/17.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/18.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/19.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/20.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/21.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/22.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/23.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/24.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="/public/gallery/25.jpg"
-              alt="Galeri Sakeena"
-              class="aspect-square w-full object-cover hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="bg-white py-24 sm:py-32" id="team">
-      <div class="mx-auto grid max-w-7xl gap-20 px-6 lg:px-8 xl:grid-cols-3">
-        <div class="max-w-xl">
-          <h2
-            class="text-3xl font-bold tracking-tight text-pretty sm:text-4xl"
-            style="color: #191e30"
-          >
-            Pasukan Kami
-          </h2>
-          <p class="mt-6 text-6xl font-bold text-gray-700">
-            The Hearts and Minds Behind Our Work
-          </p>
-          <p class="mt-6 text-xl/8 text-gray-700">
-            A passionate team driven to create, innovate, and inspire.
-          </p>
-        </div>
-        <div class="xl:col-span-2">
-          <div class="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2">
-            <div class="flex flex-col items-center">
-              <img
-                src="/public/team/ceo.png"
-                alt="Khairina"
-                class="w-64 h-64 object-cover rounded-2xl shadow-lg"
-              />
-              <div class="mt-6 text-center">
-                <h3 class="text-xl font-bold text-gray-900">Khairina</h3>
-                <p class="mt-1 text-lg font-semibold text-emerald-600">CEO</p>
+              <a href="#home" command="close" commandfor="mobile-menu" class="mobile-nav-link">Utama</a>
+              <a href="#about" command="close" commandfor="mobile-menu" class="mobile-nav-link">Tentang Kami</a>
+              <a href="#vision" command="close" commandfor="mobile-menu" class="mobile-nav-link">Visi &amp; Misi</a>
+              <a href="#gallery" command="close" commandfor="mobile-menu" class="mobile-nav-link">Galeri</a>
+              <a href="#team" command="close" commandfor="mobile-menu" class="mobile-nav-link">Pasukan kami</a>
+              <a href="#programs" command="close" commandfor="mobile-menu" class="mobile-nav-link">Program</a>
+              <a href="#contact" command="close" commandfor="mobile-menu" class="mobile-nav-link">Hubungi</a>
+              <div style="margin-top:20px;">
+                <a href="https://wa.me/601155593755" class="btn-nav" style="display:block;text-align:center;">WhatsApp</a>
               </div>
             </div>
-            <div class="flex flex-col items-center">
-              <img
-                src="/public/team/coo.png"
-                alt="Nadiah"
-                class="w-64 h-64 object-cover rounded-2xl shadow-lg"
-              />
-              <div class="mt-6 text-center">
-                <h3 class="text-xl font-bold text-gray-900">Nadiah</h3>
-                <p class="mt-1 text-lg font-semibold text-emerald-600">COO</p>
-              </div>
-            </div>
-            <div class="flex flex-col items-center">
-              <img
-                src="/public/team/pembangunan-modul.png"
-                alt="Sarah"
-                class="w-64 h-64 object-cover rounded-2xl shadow-lg"
-              />
-              <div class="mt-6 text-center">
-                <h3 class="text-xl font-bold text-gray-900">Sarah</h3>
-                <p class="mt-1 text-lg font-semibold text-emerald-600">
-                  Pembangunan Modul
-                </p>
-              </div>
-            </div>
-            <div class="flex flex-col items-center">
-              <img
-                src="/public/team/media-content-creator.png"
-                alt="Zhaf"
-                class="w-64 h-64 object-cover rounded-2xl shadow-lg"
-              />
-              <div class="mt-6 text-center">
-                <h3 class="text-xl font-bold text-gray-900">Zhaf</h3>
-                <p class="mt-1 text-lg font-semibold text-emerald-600">
-                  Media & Content Creator
-                </p>
-              </div>
-            </div>
-          </div>
+          </el-dialog-panel>
         </div>
-      </div>
-    </div>
+      </dialog>
+    </el-dialog>
 
-    <div class="bg-gray-50 py-24 sm:py-32" id="programs">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:text-center">
-          <h2 class="text-lg/7 font-semibold text-emerald-600">Program Kami</h2>
-          <p
-            class="mt-2 text-4xl font-bold tracking-tight text-pretty sm:text-5xl lg:text-balance"
-            style="color: #191e30"
-          >
-            Program Pembelajaran Kami
-          </p>
-          <p class="mt-6 text-xl/8 text-gray-700">
-            Pelbagai program Al-Quran untuk semua peringkat umur dengan pilihan
-            kelas fizikal dan online.
-          </p>
-        </div>
-        <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-          <dl
-            class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16"
-          >
-            <div class="relative pl-16">
-              <dt class="text-lg/7 font-semibold text-gray-900">
-                <div
-                  class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-emerald-500"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    data-slot="icon"
-                    aria-hidden="true"
-                    class="size-6 text-white"
-                  >
-                    <path
-                      d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                Kelas Quran Kanak-Kanak
-              </dt>
-              <dd class="mt-2 text-lg/7 text-gray-600">
-                Pembelajaran asas Al-Quran untuk kanak-kanak dengan kaedah yang
-                mudah difahami dan menyeronokkan.
-              </dd>
-            </div>
-            <div class="relative pl-16">
-              <dt class="text-lg/7 font-semibold text-gray-900">
-                <div
-                  class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-emerald-500"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    data-slot="icon"
-                    aria-hidden="true"
-                    class="size-6 text-white"
-                  >
-                    <path
-                      d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                Kelas Quran Dewasa
-              </dt>
-              <dd class="mt-2 text-lg/7 text-gray-600">
-                Program pembelajaran Al-Quran untuk dewasa yang ingin
-                memperbaiki bacaan dan memahami tajwid dengan betul.
-              </dd>
-            </div>
-            <div class="relative pl-16">
-              <dt class="text-lg/7 font-semibold text-gray-900">
-                <div
-                  class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-emerald-500"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    data-slot="icon"
-                    aria-hidden="true"
-                    class="size-6 text-white"
-                  >
-                    <path
-                      d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                Program Tahfiz
-              </dt>
-              <dd class="mt-2 text-lg/7 text-gray-600">
-                Bimbingan khusus untuk menghafaz Al-Quran dengan kaedah yang
-                sistematik dan berpandu.
-              </dd>
-            </div>
-            <div class="relative pl-16">
-              <dt class="text-lg/7 font-semibold text-gray-900">
-                <div
-                  class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-emerald-500"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    data-slot="icon"
-                    aria-hidden="true"
-                    class="size-6 text-white"
-                  >
-                    <path
-                      d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                Kelas Fizikal & Online
-              </dt>
-              <dd class="mt-2 text-lg/7 text-gray-600">
-                Fleksibiliti pembelajaran melalui kelas bersemuka di pusat atau
-                secara dalam talian mengikut kemudahan pelajar.
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </div>
 
-    <div class="overflow-hidden bg-white py-24 sm:py-32" id="tadabbur-piknik">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div
-          class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2"
-        >
-          <div class="lg:pt-4 lg:pr-8">
-            <div class="lg:max-w-lg">
-              <h2 class="text-lg/7 font-semibold text-emerald-600">
-                Program Istimewa
-              </h2>
-              <p
-                class="mt-2 text-4xl font-bold tracking-tight text-pretty sm:text-5xl"
-                style="color: #191e30"
-              >
-                Tadabbur Piknik
-              </p>
-              <p class="mt-6 text-2xl text-gray-700">
-                "Maka apakah mereka tidak mentadabburi Al-Quran? Sekiranya ia
-                datang dari selain Allah, niscaya mereka akan mendapati banyak
-                pertentangan di dalamnya." (An-Nisa' 4:82)
-              </p>
-              <dl
-                class="mt-10 max-w-xl space-y-8 text-lg/7 text-gray-600 lg:max-w-none"
-              >
-                <div class="relative pl-9">
-                  <dt class="inline font-semibold text-gray-900">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      data-slot="icon"
-                      aria-hidden="true"
-                      class="absolute top-1 left-1 size-5 text-emerald-600"
-                    >
-                      <path
-                        d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    Pembelajaran Outdoor.
-                  </dt>
-                  <dd class="inline">
-                    Belajar tadabbur Al-Quran sambil secara santai.
-                  </dd>
-                </div>
-                <div class="relative pl-9">
-                  <dt class="inline font-semibold text-gray-900">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      data-slot="icon"
-                      aria-hidden="true"
-                      class="absolute top-1 left-1 size-5 text-emerald-600"
-                    >
-                      <path
-                        d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    Ukhwah
-                  </dt>
-                  <dd class="inline">
-                    Mengeratkan ukhwah dan semangat kerjasama melalui aktiviti
-                    berkumpulan yang bermanfaat dan menghiburkan.
-                  </dd>
-                </div>
-              </dl>
-            </div>
-          </div>
-          <img
-            src="/public/main/tps.jpg"
-            alt="Tadabbur Piknik"
-            class="h-full w-full object-cover rounded-xl shadow-xl ring-1 ring-gray-200"
-          />
-        </div>
-      </div>
-    </div>
+    <!-- ════════════════════ HERO ════════════════════ -->
+    <section class="hero" id="home">
+      <img src="/public/main/01.jpg" alt="" class="hero-img" />
+      <div class="hero-overlay"></div>
 
-    <div
-      class="relative isolate overflow-hidden py-24 sm:py-32"
-      style="background-color: #191e30"
-      id="contact"
-    >
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl lg:mx-0">
-          <img
-            src="/public/main/logo.png"
-            alt="Sakeena Global"
-            class="h-16 w-auto mb-8"
-          />
-          <h2
-            class="text-5xl font-bold tracking-tight text-gray-100 sm:text-7xl"
-          >
-            Sertai Kami
-          </h2>
-          <p
-            class="mt-8 text-xl font-medium text-pretty text-gray-300 sm:text-2xl/8"
-          >
-            Hubungi kami untuk maklumat lanjut mengenai program pembelajaran
-            Al-Quran yang sesuai untuk anda dan keluarga.
-          </p>
+      <div class="hero-content">
+        <div class="reveal">
+          <a href="#contact" class="hero-chip">
+            <span class="hero-chip-dot"></span>
+            Pengambilan Kelas Online 2026 kini dibuka untuk pendaftaran.&ensp;<strong style="color:white;">Daftar Sekarang →</strong>
+          </a>
         </div>
-        <div class="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
-          <div
-            class="grid grid-cols-1 gap-x-8 gap-y-6 text-lg/7 font-semibold text-gray-300 sm:grid-cols-2 md:flex lg:gap-x-10"
-          >
-            <a href="https://wa.me/601155593755" class="hover:text-emerald-400"
-              >Hubungi WhatsApp <span aria-hidden="true">&rarr;</span></a
-            >
-            <a
-              href="mailto:sakeenaglobal@gmail.com"
-              class="hover:text-emerald-400"
-              >Email Kami <span aria-hidden="true">&rarr;</span></a
-            >
-            <a href="#programs" class="hover:text-emerald-400"
-              >Lihat Program <span aria-hidden="true">&rarr;</span></a
-            >
-          </div>
-          <dl
-            class="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            <div class="flex flex-col-reverse gap-1">
-              <dt class="text-lg/7 text-gray-300">Lokasi</dt>
-              <dd class="text-xl font-semibold tracking-tight text-gray-200">
-                Bandar Tasik Senangin, Negeri Sembilan
-              </dd>
-            </div>
-            <div class="flex flex-col-reverse gap-1">
-              <dt class="text-lg/7 text-gray-300">Telefon</dt>
-              <dd class="text-xl font-semibold tracking-tight text-gray-200">
-                +601155593755
-              </dd>
-            </div>
-            <div class="flex flex-col-reverse gap-1">
-              <dt class="text-lg/7 text-gray-300">Email</dt>
-              <dd class="text-xl font-semibold tracking-tight text-gray-200">
-                sakeenaglobal@gmail.com
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </div>
 
-    <footer class="bg-white py-8">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <p class="text-center text-sm text-gray-600">
-          &copy; 2025 Sakeena Global. Hak Cipta Terpelihara.
+        <h1 class="hero-title reveal d1">
+          When Joy Meets<br /><span>The Quran</span>
+        </h1>
+
+        <p class="hero-hadith reveal d2">
+          "Sebaik-baik kamu ialah yang mempelajari Al-Quran dan mengajarkannya"
+          <br /><span style="font-style:normal;font-size:12px;color:rgba(255,255,255,0.35);font-weight:500;">(Riwayat al-Bukhari 5027)</span>
         </p>
+
+        <div class="hero-actions reveal d3">
+          <a href="https://wa.me/601155593755" class="btn-primary">Hubungi Kami</a>
+          <a href="#programs" class="btn-outline">Lihat Program</a>
+        </div>
       </div>
+    </section>
+
+
+    <!-- ════════════════════ ABOUT ════════════════════ -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="reveal">
+            <p class="eyebrow">Mengapa Pilih Kami</p>
+            <h2 class="section-heading">Pendidikan Al-Quran Berkualiti</h2>
+            <p class="section-sub" style="margin-bottom:36px;">Kami menawarkan pendidikan Al-Quran yang komprehensif untuk kanak-kanak dan dewasa melalui kaedah yang sistematik dan kondusif.</p>
+
+            <div>
+              <div class="feature-row">
+                <div class="feat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="feat-title">Mesra Kanak-Kanak.</p>
+                  <p class="feat-desc">Suasana pembelajaran yang mesra dan selesa untuk kanak-kanak dengan pendekatan yang menarik minat.</p>
+                </div>
+              </div>
+
+              <div class="feature-row">
+                <div class="feat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="feat-title">Guru Terlatih.</p>
+                  <p class="feat-desc">Tenaga pengajar terlatih dan berpengalaman dalam pendidikan Al-Quran dengan metod pengajaran yang berkesan.</p>
+                </div>
+              </div>
+
+              <div class="feature-row">
+                <div class="feat-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="feat-title">Pembelajaran Sistematik.</p>
+                  <p class="feat-desc">Kurikulum tersusun dengan baik dan pembelajaran yang kondusif untuk memastikan perkembangan pelajar yang konsisten.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-image reveal d2">
+            <img src="/public/main/02.png" alt="Suasana pembelajaran" />
+            <div class="about-image-badge">
+              <div class="badge-dot"></div>
+              <span class="badge-text">Pembelajaran aktif setiap hari</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════ VISION ════════════════════ -->
+    <section class="section vision-section" id="vision">
+      <div class="container">
+        <div class="reveal">
+          <p class="eyebrow eyebrow-light">Visi &amp; Misi</p>
+          <h2 class="section-heading section-heading-light">Matlamat Kami</h2>
+        </div>
+
+        <div class="vision-grid">
+          <div class="vision-card reveal d1">
+            <div class="vision-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="vision-title">Guru</h3>
+            <p class="vision-desc">Menjadi platform bagi Ahlul Quran berkhidmat dan berkembang melalui latihan, kemahiran dan pembangunan peribadi yang berterusan.</p>
+          </div>
+
+          <div class="vision-card reveal d2">
+            <div class="vision-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <h3 class="vision-title">Komuniti</h3>
+            <p class="vision-desc">Memperkukuh institusi kekeluargaan dan membina masyarakat berakhlak berpandukan petunjuk Al-Quran.</p>
+          </div>
+
+          <div class="vision-card reveal d3">
+            <div class="vision-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <h3 class="vision-title">Pembelajaran</h3>
+            <p class="vision-desc">Menyediakan sistem pembelajaran Al-Quran yang menyeronokkan, tersusun dan berasaskan nilai — agar anak-anak membesar dengan cinta kepada Al-Quran serta membawa ketenangan (sakeenah) dalam diri, keluarga dan komuniti.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════ GALLERY ════════════════════ -->
+    <section class="section gallery-section" id="gallery">
+      <div class="container">
+        <div class="reveal" style="text-align:center;">
+          <p class="eyebrow">Kenangan Bersama</p>
+          <h2 class="section-heading">Galeri Kami</h2>
+        </div>
+
+        <div class="gallery-grid reveal d1">
+          <div class="gallery-item"><img src="/public/gallery/1.JPG" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/2.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/3.JPG" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/4.JPG" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/5.JPG" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/6.JPG" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/7.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/8.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/9.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/10.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/11.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/12.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/13.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/14.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/15.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/16.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/17.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/18.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/19.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/20.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/21.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/22.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/23.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/24.jpg" alt="Galeri Sakeena" /></div>
+          <div class="gallery-item"><img src="/public/gallery/25.jpg" alt="Galeri Sakeena" /></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════ TEAM ════════════════════ -->
+    <section class="section team-section" id="team">
+      <div class="container">
+        <div class="team-header-grid">
+          <div class="reveal">
+            <p class="eyebrow">Wajah Di Sebalik</p>
+            <h2 class="section-heading">Pasukan Kami</h2>
+          </div>
+          <div class="reveal d1">
+            <p class="team-tagline">The Hearts and Minds Behind Our Work</p>
+            <p class="section-sub" style="margin-top:14px;">A passionate team driven to create, innovate, and inspire.</p>
+          </div>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card reveal d1">
+            <div class="team-photo-wrap">
+              <img src="/public/team/ceo.png" alt="Khairina" class="team-photo" />
+            </div>
+            <p class="team-name">Khairina</p>
+            <p class="team-role">CEO</p>
+          </div>
+
+          <div class="team-card reveal d2">
+            <div class="team-photo-wrap">
+              <img src="/public/team/coo.png" alt="Nadiah" class="team-photo" />
+            </div>
+            <p class="team-name">Nadiah</p>
+            <p class="team-role">COO</p>
+          </div>
+
+          <div class="team-card reveal d3">
+            <div class="team-photo-wrap">
+              <img src="/public/team/pembangunan-modul.png" alt="Sarah" class="team-photo" />
+            </div>
+            <p class="team-name">Sarah</p>
+            <p class="team-role">Pembangunan Modul</p>
+          </div>
+
+          <div class="team-card reveal d4">
+            <div class="team-photo-wrap">
+              <img src="/public/team/media-content-creator.png" alt="Zhaf" class="team-photo" />
+            </div>
+            <p class="team-name">Zhaf</p>
+            <p class="team-role">Media &amp; Content Creator</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════ PROGRAMS ════════════════════ -->
+    <section class="section programs-section" id="programs">
+      <div class="container">
+        <div class="reveal" style="text-align:center;">
+          <p class="eyebrow">Program Kami</p>
+          <h2 class="section-heading">Program Pembelajaran Kami</h2>
+          <p class="section-sub" style="margin:0 auto;">Pelbagai program Al-Quran untuk semua peringkat umur dengan pilihan kelas fizikal dan online.</p>
+        </div>
+
+        <div class="programs-grid">
+          <div class="program-card reveal d1">
+            <p class="program-num">01</p>
+            <div class="program-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <h3 class="program-title">Kelas Quran Kanak-Kanak</h3>
+            <p class="program-desc">Pembelajaran asas Al-Quran untuk kanak-kanak dengan kaedah yang mudah difahami dan menyeronokkan.</p>
+          </div>
+
+          <div class="program-card reveal d2">
+            <p class="program-num">02</p>
+            <div class="program-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <h3 class="program-title">Kelas Quran Dewasa</h3>
+            <p class="program-desc">Program pembelajaran Al-Quran untuk dewasa yang ingin memperbaiki bacaan dan memahami tajwid dengan betul.</p>
+          </div>
+
+          <div class="program-card reveal d3">
+            <p class="program-num">03</p>
+            <div class="program-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <h3 class="program-title">Program Tahfiz</h3>
+            <p class="program-desc">Bimbingan khusus untuk menghafaz Al-Quran dengan kaedah yang sistematik dan berpandu.</p>
+          </div>
+
+          <div class="program-card reveal d4">
+            <p class="program-num">04</p>
+            <div class="program-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h3 class="program-title">Kelas Fizikal &amp; Online</h3>
+            <p class="program-desc">Fleksibiliti pembelajaran melalui kelas bersemuka di pusat atau secara dalam talian mengikut kemudahan pelajar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════ TADABBUR PIKNIK ════════════════════ -->
+    <section class="section tadabbur-section" id="tadabbur-piknik">
+      <div class="container">
+        <div class="tadabbur-grid">
+          <div class="reveal">
+            <p class="eyebrow">Program Istimewa</p>
+            <h2 class="section-heading">Tadabbur Piknik</h2>
+
+            <div class="quote-pill">
+              "Maka apakah mereka tidak mentadabburi Al-Quran? Sekiranya ia datang dari selain Allah, niscaya mereka akan mendapati banyak pertentangan di dalamnya."
+              <span class="quote-source">(An-Nisa' 4:82)</span>
+            </div>
+
+            <div>
+              <div class="detail-row">
+                <div class="detail-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="detail-title">Pembelajaran Outdoor.</p>
+                  <p class="detail-desc">Belajar tadabbur Al-Quran sambil secara santai.</p>
+                </div>
+              </div>
+
+              <div class="detail-row">
+                <div class="detail-icon-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="detail-title">Ukhwah</p>
+                  <p class="detail-desc">Mengeratkan ukhwah dan semangat kerjasama melalui aktiviti berkumpulan yang bermanfaat dan menghiburkan.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tad-image reveal d2">
+            <img src="/public/main/tps.jpg" alt="Tadabbur Piknik" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════ CONTACT ════════════════════ -->
+    <section class="section contact-section" id="contact">
+      <div class="container contact-inner">
+        <div class="reveal">
+          <img src="/public/main/logo.png" alt="Sakeena Global" class="contact-logo" />
+          <h2 class="contact-title">Sertai Kami</h2>
+          <p class="contact-sub">Hubungi kami untuk maklumat lanjut mengenai program pembelajaran Al-Quran yang sesuai untuk anda dan keluarga.</p>
+
+          <div class="contact-links">
+            <a href="https://wa.me/601155593755" class="contact-btn contact-btn-primary">Hubungi WhatsApp →</a>
+            <a href="mailto:sakeenaglobal@gmail.com" class="contact-btn contact-btn-ghost">Email Kami →</a>
+            <a href="#programs" class="contact-btn contact-btn-ghost">Lihat Program →</a>
+          </div>
+        </div>
+
+        <div class="contact-divider"></div>
+
+        <div class="contact-info-grid reveal d1">
+          <div>
+            <p class="info-label">Lokasi</p>
+            <p class="info-value">Bandar Tasik Senangin,<br />Negeri Sembilan</p>
+          </div>
+          <div>
+            <p class="info-label">Telefon</p>
+            <p class="info-value">+601155593755</p>
+          </div>
+          <div>
+            <p class="info-label">Email</p>
+            <p class="info-value">sakeenaglobal@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════ LIGHTBOX ════════════════════ -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+
+      <button class="lightbox-close" id="lightbox-close" aria-label="Tutup">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <div class="lightbox-content">
+        <button class="lightbox-nav prev" id="lightbox-prev" aria-label="Sebelumnya">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+
+        <div class="lightbox-img-wrap">
+          <img src="" alt="" class="lightbox-img" id="lightbox-img" />
+        </div>
+
+        <button class="lightbox-nav next" id="lightbox-next" aria-label="Seterusnya">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="lightbox-thumbs" id="lightbox-thumbs"></div>
+      <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <!-- ════════════════════ FOOTER ════════════════════ -->
+    <footer class="site-footer">
+      &copy; 2025 Sakeena Global. Hak Cipta Terpelihara.
     </footer>
+
+
     <script>
-      // Mobile menu functionality
-      document.addEventListener('DOMContentLoaded', function() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuToggle = document.querySelector('[commandfor="mobile-menu"][command="show-modal"]');
-        const closeButton = document.querySelector('[commandfor="mobile-menu"][command="close"]');
-        const navLinks = document.querySelectorAll('#mobile-menu a[href^="#"]');
+      // Mobile menu
+      document.addEventListener('DOMContentLoaded', function () {
+        const menu = document.getElementById('mobile-menu');
+        const open = document.querySelector('[commandfor="mobile-menu"][command="show-modal"]');
+        const close = document.querySelector('[commandfor="mobile-menu"][command="close"]');
+        const links = document.querySelectorAll('#mobile-menu a[href^="#"]');
 
-        // Open mobile menu
-        if (menuToggle) {
-          menuToggle.addEventListener('click', function() {
-            mobileMenu.showModal();
-          });
-        }
+        if (open) open.addEventListener('click', () => menu.showModal());
+        if (close) close.addEventListener('click', () => menu.close());
+        links.forEach(l => l.addEventListener('click', () => menu.close()));
+        if (menu) menu.addEventListener('click', e => { if (e.target === menu) menu.close(); });
 
-        // Close mobile menu
-        if (closeButton) {
-          closeButton.addEventListener('click', function() {
-            mobileMenu.close();
-          });
-        }
+        // Scroll reveal
+        const io = new IntersectionObserver(
+          entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+          { threshold: 0.1, rootMargin: '0px 0px -32px 0px' }
+        );
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-        // Close mobile menu when clicking navigation links
-        navLinks.forEach(function(link) {
-          link.addEventListener('click', function() {
-            mobileMenu.close();
-          });
+        // ── Lightbox ──
+        const lightbox    = document.getElementById('lightbox');
+        const lbImg       = document.getElementById('lightbox-img');
+        const lbClose     = document.getElementById('lightbox-close');
+        const lbBackdrop  = document.getElementById('lightbox-backdrop');
+        const lbPrev      = document.getElementById('lightbox-prev');
+        const lbNext      = document.getElementById('lightbox-next');
+        const lbThumbs    = document.getElementById('lightbox-thumbs');
+        const lbCounter   = document.getElementById('lightbox-counter');
+
+        const galleryImgs = Array.from(document.querySelectorAll('.gallery-item img'));
+        let current = 0;
+
+        // Build thumbnail strip
+        galleryImgs.forEach((img, i) => {
+          const t = document.createElement('img');
+          t.src = img.src;
+          t.alt = '';
+          t.className = 'lightbox-thumb';
+          t.addEventListener('click', () => goTo(i));
+          lbThumbs.appendChild(t);
         });
 
-        // Close mobile menu when clicking outside
-        if (mobileMenu) {
-          mobileMenu.addEventListener('click', function(e) {
-            if (e.target === mobileMenu) {
-              mobileMenu.close();
-            }
-          });
+        function getThumbs() { return Array.from(lbThumbs.querySelectorAll('.lightbox-thumb')); }
+
+        function goTo(index) {
+          const thumbs = getThumbs();
+          lbImg.classList.add('switching');
+          setTimeout(() => {
+            current = (index + galleryImgs.length) % galleryImgs.length;
+            lbImg.src = galleryImgs[current].src;
+            lbImg.classList.remove('switching');
+            lbCounter.textContent = `${current + 1} / ${galleryImgs.length}`;
+            thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
+            // Scroll active thumb into view
+            thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }, 160);
         }
+
+        function openLightbox(index) {
+          current = index;
+          lbImg.src = galleryImgs[current].src;
+          lbCounter.textContent = `${current + 1} / ${galleryImgs.length}`;
+          getThumbs().forEach((t, i) => t.classList.toggle('active', i === current));
+          getThumbs()[current].scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'center' });
+          lightbox.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+          lightbox.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+
+        galleryImgs.forEach((img, i) => {
+          img.closest('.gallery-item').addEventListener('click', () => openLightbox(i));
+        });
+
+        lbClose.addEventListener('click', closeLightbox);
+        lbBackdrop.addEventListener('click', closeLightbox);
+        lbPrev.addEventListener('click', () => goTo(current - 1));
+        lbNext.addEventListener('click', () => goTo(current + 1));
+
+        // Keyboard nav
+        document.addEventListener('keydown', e => {
+          if (!lightbox.classList.contains('open')) return;
+          if (e.key === 'Escape')      closeLightbox();
+          if (e.key === 'ArrowLeft')   goTo(current - 1);
+          if (e.key === 'ArrowRight')  goTo(current + 1);
+        });
+
+        // Touch swipe
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+        lightbox.addEventListener('touchend', e => {
+          const dx = e.changedTouches[0].clientX - touchStartX;
+          if (Math.abs(dx) > 50) dx < 0 ? goTo(current + 1) : goTo(current - 1);
+        });
       });
     </script>
   </body>
