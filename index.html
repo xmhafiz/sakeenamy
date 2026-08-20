@@ -79,20 +79,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --green-950: #052e16;
-        --green-900: #064e3b;
-        --green-700: #047857;
-        --green-500: #10b981;
-        --green-400: #34d399;
-        --green-50:  #f0fdf4;
-        --neutral-950: #0a0a0a;
-        --neutral-900: #171717;
-        --neutral-800: #262626;
-        --neutral-600: #525252;
-        --neutral-400: #a3a3a3;
-        --neutral-200: #e5e5e5;
-        --neutral-100: #f5f5f5;
-        --white: #ffffff;
+        --green-950: #0d4f4a;
+        --green-900: #115e58;
+        --green-700: #0f766e;
+        --green-500: #14b8a6;
+        --green-400: #2dd4bf;
+        --green-50:  #f0fdfa;
+        --neutral-950: #2a2420;
+        --neutral-900: #322b24;
+        --neutral-800: #443a30;
+        --neutral-600: #6b5f4f;
+        --neutral-400: #a89a86;
+        --neutral-200: #e8e0d1;
+        --neutral-100: #f6f1e6;
+        --white: #fffaf0;
       }
 
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -245,7 +245,7 @@
       .hero-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(160deg, rgba(5,46,22,0.88) 0%, rgba(5,46,22,0.72) 50%, rgba(5,46,22,0.9) 100%);
+        background: linear-gradient(160deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.72) 50%, rgba(0,0,0,0.92) 100%);
         z-index: 1;
       }
 
@@ -261,8 +261,8 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: rgba(16,185,129,0.15);
-        border: 1px solid rgba(52,211,153,0.35);
+        background: rgba(20,184,166,0.15);
+        border: 1px solid rgba(45,212,191,0.35);
         color: var(--green-400);
         font-size: 15px;
         font-weight: 600;
@@ -273,7 +273,7 @@
         text-decoration: none;
         transition: background 0.2s;
       }
-      .hero-chip:hover { background: rgba(16,185,129,0.25); }
+      .hero-chip:hover { background: rgba(20,184,166,0.25); }
       @media (max-width: 640px) {
         .hero-chip {
           flex-direction: column;
@@ -338,7 +338,7 @@
       .btn-primary:hover {
         background: var(--green-500);
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(16,185,129,0.35);
+        box-shadow: 0 8px 24px rgba(20,184,166,0.35);
       }
 
       .btn-outline {
@@ -418,7 +418,7 @@
         margin-top: 2px;
         transition: background 0.2s;
       }
-      .feature-row:hover .feat-icon { background: #d1fae5; }
+      .feature-row:hover .feat-icon { background: #ccfbf1; }
 
       .feat-title { font-size: 18px; font-weight: 600; color: var(--neutral-950); margin-bottom: 4px; }
       .feat-desc { font-size: 17px; font-weight: 400; color: var(--neutral-600); line-height: 1.6; }
@@ -463,7 +463,7 @@
         position: relative;
         overflow: hidden;
       }
-      .vision-card:hover { background: #111111; }
+      .vision-card:hover { background: #322b24; }
       .vision-card::before {
         content: '';
         position: absolute;
@@ -477,8 +477,8 @@
 
       .vision-icon {
         width: 48px; height: 48px;
-        background: rgba(16,185,129,0.1);
-        border: 1px solid rgba(16,185,129,0.2);
+        background: rgba(20,184,166,0.1);
+        border: 1px solid rgba(20,184,166,0.2);
         border-radius: 12px;
         display: flex; align-items: center; justify-content: center;
         margin-bottom: 20px;
@@ -520,7 +520,7 @@
       .gallery-item::after {
         content: '';
         position: absolute; inset: 0;
-        background: rgba(5,46,22,0.5);
+        background: rgba(13,79,74,0.5);
         opacity: 0;
         transition: opacity 0.3s;
       }
@@ -694,7 +694,7 @@
         font-weight: 700;
         letter-spacing: -0.02em;
         line-height: 1.2;
-        color: var(--neutral-300, #d4d4d4);
+        color: var(--neutral-300, #cbbfa9);
       }
 
       .team-grid {
@@ -722,7 +722,7 @@
         transition: box-shadow 0.3s, transform 0.3s;
       }
       .team-card:hover .team-photo {
-        box-shadow: 0 0 0 3px var(--green-400), 0 12px 36px rgba(16,185,129,0.2);
+        box-shadow: 0 0 0 3px var(--green-400), 0 12px 36px rgba(20,184,166,0.2);
         transform: translateY(-4px);
       }
 
@@ -754,14 +754,14 @@
         background: var(--white);
         border-radius: 16px;
         padding: 32px 28px;
-        border: 1px solid rgba(16,185,129,0.1);
+        border: 1px solid rgba(20,184,166,0.1);
         transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
         position: relative;
         overflow: hidden;
       }
       .program-card:hover {
-        border-color: rgba(16,185,129,0.35);
-        box-shadow: 0 12px 40px rgba(16,185,129,0.1);
+        border-color: rgba(20,184,166,0.35);
+        box-shadow: 0 12px 40px rgba(20,184,166,0.1);
         transform: translateY(-3px);
       }
 
@@ -786,6 +786,118 @@
       .program-title { font-size: 20px; font-weight: 700; color: var(--neutral-950); margin-bottom: 8px; letter-spacing: -0.01em; }
       .program-desc { font-size: 17px; font-weight: 400; color: var(--neutral-600); line-height: 1.65; }
 
+      /* ── DAFTAR KELAS ── */
+      .daftar-section { background: var(--green-950); position: relative; overflow: hidden; }
+      .daftar-section .eyebrow { color: var(--green-400); }
+      .daftar-section .section-heading { color: var(--white); }
+      .daftar-section .section-sub { color: rgba(255,255,255,0.5); }
+
+      .daftar-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        margin-top: 56px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      @media (max-width: 700px) { .daftar-grid { grid-template-columns: 1fr; } }
+
+      .daftar-card {
+        background: var(--neutral-900);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px;
+        padding: 40px 32px;
+        transition: border-color 0.25s, transform 0.25s;
+      }
+      .daftar-card:hover { border-color: rgba(20,184,166,0.4); transform: translateY(-3px); }
+
+      .daftar-icon-wrap {
+        width: 52px; height: 52px;
+        background: var(--green-700);
+        border-radius: 14px;
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .daftar-title { font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 10px; letter-spacing: -0.01em; }
+      .daftar-desc { font-size: 17px; font-weight: 400; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 24px; }
+
+      .daftar-list { list-style: none; margin-bottom: 32px; }
+      .daftar-list li {
+        font-size: 16px;
+        color: rgba(255,255,255,0.75);
+        padding-left: 26px;
+        position: relative;
+        margin-bottom: 12px;
+        line-height: 1.5;
+      }
+      .daftar-list li::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 7px;
+        width: 14px; height: 14px;
+        border-radius: 50%;
+        background: rgba(20,184,166,0.15);
+        border: 1px solid var(--green-500);
+      }
+      .daftar-list li::after {
+        content: '';
+        position: absolute;
+        left: 4px; top: 10.5px;
+        width: 6px; height: 3px;
+        border-left: 2px solid var(--green-400);
+        border-bottom: 2px solid var(--green-400);
+        transform: rotate(-45deg);
+      }
+
+      .daftar-btn { display: block; text-align: center; width: 100%; }
+
+      /* ── FAQ ── */
+      .faq-section { background: var(--white); }
+
+      .faq-list { margin-top: 48px; }
+
+      .faq-item {
+        border-bottom: 1px solid var(--neutral-200);
+        padding: 22px 0;
+      }
+      .faq-item:first-child { border-top: 1px solid var(--neutral-200); }
+
+      .faq-question {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--neutral-950);
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .faq-question::-webkit-details-marker { display: none; }
+
+      .faq-toggle {
+        flex-shrink: 0;
+        width: 28px; height: 28px;
+        border-radius: 50%;
+        background: var(--green-50);
+        color: var(--green-700);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 18px;
+        font-weight: 400;
+        transition: transform 0.25s, background 0.25s;
+      }
+      .faq-item[open] .faq-toggle { transform: rotate(45deg); background: var(--green-500); color: white; }
+
+      .faq-answer {
+        font-size: 16.5px;
+        color: var(--neutral-600);
+        line-height: 1.7;
+        margin-top: 14px;
+        padding-right: 44px;
+      }
+
       /* ── TADABBUR ── */
       .tadabbur-section { background: var(--white); }
 
@@ -806,7 +918,7 @@
         font-size: 18px;
         font-style: italic;
         font-weight: 400;
-        color: var(--neutral-700, #404040);
+        color: var(--neutral-700, #4a4038);
         line-height: 1.7;
         margin: 20px 0 28px;
       }
@@ -858,7 +970,7 @@
         top: -300px; right: -300px;
         width: 700px; height: 700px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 65%);
+        background: radial-gradient(circle, rgba(20,184,166,0.12) 0%, transparent 65%);
         pointer-events: none;
       }
       .contact-section::after {
@@ -867,7 +979,7 @@
         bottom: -200px; left: -100px;
         width: 500px; height: 500px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 65%);
+        background: radial-gradient(circle, rgba(20,184,166,0.07) 0%, transparent 65%);
         pointer-events: none;
       }
 
@@ -965,10 +1077,10 @@
         <nav class="nav-links" aria-label="Global">
           <a href="#home" class="nav-link">Utama</a>
           <a href="#about" class="nav-link">Tentang Kami</a>
-          <a href="#vision" class="nav-link">Visi &amp; Misi</a>
-          <a href="#gallery" class="nav-link">Galeri</a>
-          <a href="#team" class="nav-link">Pasukan kami</a>
           <a href="#programs" class="nav-link">Program</a>
+          <a href="#daftar" class="nav-link">Daftar Kelas</a>
+          <a href="#gallery" class="nav-link">Galeri</a>
+          <a href="#faq" class="nav-link">FAQ</a>
           <a href="#contact" class="nav-link">Hubungi</a>
         </nav>
 
@@ -997,7 +1109,7 @@
             <div class="mobile-panel">
               <div class="mobile-header">
                 <img src="/public/main/logo.webp" alt="Sakeena Global" width="113" height="36" style="height:36px; width:auto;" />
-                <button type="button" command="close" commandfor="mobile-menu" style="background:none;border:none;cursor:pointer;padding:8px;color:#525252;">
+                <button type="button" command="close" commandfor="mobile-menu" style="background:none;border:none;cursor:pointer;padding:8px;color:#6b5f4f;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
@@ -1005,10 +1117,10 @@
               </div>
               <a href="#home" command="close" commandfor="mobile-menu" class="mobile-nav-link">Utama</a>
               <a href="#about" command="close" commandfor="mobile-menu" class="mobile-nav-link">Tentang Kami</a>
-              <a href="#vision" command="close" commandfor="mobile-menu" class="mobile-nav-link">Visi &amp; Misi</a>
-              <a href="#gallery" command="close" commandfor="mobile-menu" class="mobile-nav-link">Galeri</a>
-              <a href="#team" command="close" commandfor="mobile-menu" class="mobile-nav-link">Pasukan kami</a>
               <a href="#programs" command="close" commandfor="mobile-menu" class="mobile-nav-link">Program</a>
+              <a href="#daftar" command="close" commandfor="mobile-menu" class="mobile-nav-link">Daftar Kelas</a>
+              <a href="#gallery" command="close" commandfor="mobile-menu" class="mobile-nav-link">Galeri</a>
+              <a href="#faq" command="close" commandfor="mobile-menu" class="mobile-nav-link">FAQ</a>
               <a href="#contact" command="close" commandfor="mobile-menu" class="mobile-nav-link">Hubungi</a>
               <div style="margin-top:20px;">
                 <a href="https://wa.me/601155593755" class="btn-nav" style="display:block;text-align:center;">WhatsApp</a>
@@ -1027,7 +1139,7 @@
 
       <div class="hero-content">
         <div class="reveal">
-          <a href="#contact" class="hero-chip">
+          <a href="#daftar" class="hero-chip">
             <span class="hero-chip-dot"></span>
             Pengambilan Kelas Online 2026 kini dibuka untuk pendaftaran.&ensp;<strong style="color:white;">Daftar Sekarang →</strong>
           </a>
@@ -1043,8 +1155,8 @@
         </p>
 
         <div class="hero-actions reveal d3">
-          <a href="https://wa.me/601155593755" class="btn-primary">Hubungi Kami</a>
-          <a href="#programs" class="btn-outline">Lihat Program</a>
+          <a href="https://wa.me/601155593755?text=Saya%20nak%20daftar%20Kelas%20Online" class="btn-primary">Daftar Kelas Online</a>
+          <a href="https://wa.me/601155593755?text=Saya%20nak%20daftar%20Kelas%20Fizikal" class="btn-outline">Daftar Kelas Fizikal</a>
         </div>
       </div>
     </section>
@@ -1062,7 +1174,7 @@
             <div>
               <div class="feature-row">
                 <div class="feat-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>
                   </svg>
                 </div>
@@ -1074,7 +1186,7 @@
 
               <div class="feature-row">
                 <div class="feat-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
                   </svg>
                 </div>
@@ -1086,7 +1198,7 @@
 
               <div class="feature-row">
                 <div class="feat-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
                   </svg>
                 </div>
@@ -1110,6 +1222,110 @@
     </section>
 
 
+    <!-- ════════════════════ PROGRAMS ════════════════════ -->
+    <section class="section programs-section" id="programs">
+      <div class="container">
+        <div class="reveal" style="text-align:center;">
+          <p class="eyebrow">Program Kami</p>
+          <h2 class="section-heading">Program Pembelajaran Kami</h2>
+          <p class="section-sub" style="margin:0 auto;">Pelbagai program Al-Quran untuk semua peringkat umur dengan pilihan kelas fizikal dan online.</p>
+        </div>
+
+        <div class="programs-grid">
+          <div class="program-card reveal d1">
+            <p class="program-num">01</p>
+            <div class="program-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <h3 class="program-title">Kelas Quran Kanak-Kanak</h3>
+            <p class="program-desc">Pembelajaran asas Al-Quran untuk kanak-kanak dengan kaedah yang mudah difahami dan menyeronokkan.</p>
+          </div>
+
+          <div class="program-card reveal d2">
+            <p class="program-num">02</p>
+            <div class="program-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <h3 class="program-title">Kelas Quran Dewasa</h3>
+            <p class="program-desc">Program pembelajaran Al-Quran untuk dewasa yang ingin memperbaiki bacaan dan memahami tajwid dengan betul.</p>
+          </div>
+
+          <div class="program-card reveal d3">
+            <p class="program-num">03</p>
+            <div class="program-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <h3 class="program-title">Program Tahfiz</h3>
+            <p class="program-desc">Bimbingan khusus untuk menghafaz Al-Quran dengan kaedah yang sistematik dan berpandu.</p>
+          </div>
+
+          <div class="program-card reveal d4">
+            <p class="program-num">04</p>
+            <div class="program-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h3 class="program-title">Kelas Fizikal &amp; Online</h3>
+            <p class="program-desc">Fleksibiliti pembelajaran melalui kelas bersemuka di pusat atau secara dalam talian mengikut kemudahan pelajar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════ DAFTAR KELAS ════════════════════ -->
+    <section class="section daftar-section" id="daftar">
+      <div class="container">
+        <div class="reveal" style="text-align:center;">
+          <p class="eyebrow">Daftar Sekarang</p>
+          <h2 class="section-heading">Pilih Kaedah Pembelajaran Anda</h2>
+          <p class="section-sub" style="margin:0 auto;">Kami menawarkan fleksibiliti melalui dua pilihan mod pembelajaran Al-Quran, sesuai dengan gaya hidup anda dan keluarga.</p>
+        </div>
+
+        <div class="daftar-grid">
+          <div class="daftar-card reveal d1">
+            <div class="daftar-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h3 class="daftar-title">Kelas Online</h3>
+            <p class="daftar-desc">Belajar Al-Quran dari mana sahaja mengikut waktu yang sesuai untuk anda dan keluarga.</p>
+            <ul class="daftar-list">
+              <li>Sesi interaktif secara live bersama guru</li>
+              <li>Modul &amp; bahan pembelajaran disediakan</li>
+              <li>Sesuai untuk semua peringkat umur</li>
+            </ul>
+            <a href="https://wa.me/601155593755?text=Saya%20nak%20daftar%20Kelas%20Online" class="btn-primary daftar-btn">Daftar Kelas Online →</a>
+          </div>
+
+          <div class="daftar-card reveal d2">
+            <div class="daftar-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <h3 class="daftar-title">Kelas Fizikal</h3>
+            <p class="daftar-desc">Belajar bersemuka di pusat kami di Bandar Tasik Senangin, Negeri Sembilan dengan suasana yang kondusif.</p>
+            <ul class="daftar-list">
+              <li>Bimbingan terus daripada guru</li>
+              <li>Suasana pembelajaran kondusif</li>
+              <li>Interaksi &amp; ukhwah bersama rakan</li>
+            </ul>
+            <a href="https://wa.me/601155593755?text=Saya%20nak%20daftar%20Kelas%20Fizikal" class="btn-primary daftar-btn">Daftar Kelas Fizikal →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
     <!-- ════════════════════ VISION ════════════════════ -->
     <section class="section vision-section" id="vision">
       <div class="container">
@@ -1121,7 +1337,7 @@
         <div class="vision-grid">
           <div class="vision-card reveal d1">
             <div class="vision-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
               </svg>
             </div>
@@ -1131,7 +1347,7 @@
 
           <div class="vision-card reveal d2">
             <div class="vision-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
               </svg>
             </div>
@@ -1141,7 +1357,7 @@
 
           <div class="vision-card reveal d3">
             <div class="vision-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
               </svg>
             </div>
@@ -1243,64 +1459,6 @@
     </section>
 
 
-    <!-- ════════════════════ PROGRAMS ════════════════════ -->
-    <section class="section programs-section" id="programs">
-      <div class="container">
-        <div class="reveal" style="text-align:center;">
-          <p class="eyebrow">Program Kami</p>
-          <h2 class="section-heading">Program Pembelajaran Kami</h2>
-          <p class="section-sub" style="margin:0 auto;">Pelbagai program Al-Quran untuk semua peringkat umur dengan pilihan kelas fizikal dan online.</p>
-        </div>
-
-        <div class="programs-grid">
-          <div class="program-card reveal d1">
-            <p class="program-num">01</p>
-            <div class="program-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-              </svg>
-            </div>
-            <h3 class="program-title">Kelas Quran Kanak-Kanak</h3>
-            <p class="program-desc">Pembelajaran asas Al-Quran untuk kanak-kanak dengan kaedah yang mudah difahami dan menyeronokkan.</p>
-          </div>
-
-          <div class="program-card reveal d2">
-            <p class="program-num">02</p>
-            <div class="program-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-              </svg>
-            </div>
-            <h3 class="program-title">Kelas Quran Dewasa</h3>
-            <p class="program-desc">Program pembelajaran Al-Quran untuk dewasa yang ingin memperbaiki bacaan dan memahami tajwid dengan betul.</p>
-          </div>
-
-          <div class="program-card reveal d3">
-            <p class="program-num">03</p>
-            <div class="program-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-              </svg>
-            </div>
-            <h3 class="program-title">Program Tahfiz</h3>
-            <p class="program-desc">Bimbingan khusus untuk menghafaz Al-Quran dengan kaedah yang sistematik dan berpandu.</p>
-          </div>
-
-          <div class="program-card reveal d4">
-            <p class="program-num">04</p>
-            <div class="program-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-              </svg>
-            </div>
-            <h3 class="program-title">Kelas Fizikal &amp; Online</h3>
-            <p class="program-desc">Fleksibiliti pembelajaran melalui kelas bersemuka di pusat atau secara dalam talian mengikut kemudahan pelajar.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
     <!-- ════════════════════ TADABBUR PIKNIK ════════════════════ -->
     <section class="section tadabbur-section" id="tadabbur-piknik">
       <div class="container">
@@ -1317,7 +1475,7 @@
             <div>
               <div class="detail-row">
                 <div class="detail-icon-box">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
                   </svg>
                 </div>
@@ -1329,7 +1487,7 @@
 
               <div class="detail-row">
                 <div class="detail-icon-box">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                   </svg>
                 </div>
@@ -1349,6 +1507,41 @@
     </section>
 
 
+    <!-- ════════════════════ FAQ ════════════════════ -->
+    <section class="section faq-section" id="faq">
+      <div class="container-md">
+        <div class="reveal" style="text-align:center;">
+          <p class="eyebrow">Soalan Lazim</p>
+          <h2 class="section-heading">Ada Persoalan?</h2>
+          <p class="section-sub" style="margin:0 auto;">Berikut adalah beberapa soalan yang kerap ditanya sebelum mendaftar.</p>
+        </div>
+
+        <div class="faq-list reveal d1">
+          <details class="faq-item">
+            <summary class="faq-question">Bagaimana cara saya mendaftar untuk kelas?<span class="faq-toggle">+</span></summary>
+            <p class="faq-answer">Anda boleh menghubungi kami terus melalui WhatsApp untuk maklumat pendaftaran, yuran dan jadual kelas terkini.</p>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">Apakah perbezaan antara Kelas Online dan Kelas Fizikal?<span class="faq-toggle">+</span></summary>
+            <p class="faq-answer">Kelas Online membolehkan anda belajar dari mana sahaja mengikut jadual yang fleksibel, manakala Kelas Fizikal diadakan secara bersemuka di pusat kami di Bandar Tasik Senangin dengan bimbingan terus daripada guru.</p>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">Sesuai untuk peringkat umur berapa?<span class="faq-toggle">+</span></summary>
+            <p class="faq-answer">Kami menawarkan kelas untuk kanak-kanak dan dewasa, termasuk program Tahfiz bagi mereka yang ingin menghafaz Al-Quran.</p>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">Bolehkah saya menukar mod pembelajaran selepas mendaftar?<span class="faq-toggle">+</span></summary>
+            <p class="faq-answer">Boleh. Hubungi kami dan pasukan Sakeena akan bantu uruskan penukaran mengikut kesesuaian anda.</p>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">Apakah kelayakan guru yang mengajar?<span class="faq-toggle">+</span></summary>
+            <p class="faq-answer">Semua tenaga pengajar kami terlatih dan berpengalaman dalam pendidikan Al-Quran.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+
     <!-- ════════════════════ CONTACT ════════════════════ -->
     <section class="section contact-section" id="contact">
       <div class="container contact-inner">
@@ -1358,9 +1551,9 @@
           <p class="contact-sub">Hubungi kami untuk maklumat lanjut mengenai program pembelajaran Al-Quran yang sesuai untuk anda dan keluarga.</p>
 
           <div class="contact-links">
-            <a href="https://wa.me/601155593755" class="contact-btn contact-btn-primary">Hubungi WhatsApp →</a>
+            <a href="https://wa.me/601155593755?text=Saya%20nak%20daftar%20Kelas%20Online" class="contact-btn contact-btn-primary">Daftar Kelas Online →</a>
+            <a href="https://wa.me/601155593755?text=Saya%20nak%20daftar%20Kelas%20Fizikal" class="contact-btn contact-btn-primary">Daftar Kelas Fizikal →</a>
             <a href="mailto:sakeenaglobal@gmail.com" class="contact-btn contact-btn-ghost">Email Kami →</a>
-            <a href="#programs" class="contact-btn contact-btn-ghost">Lihat Program →</a>
           </div>
         </div>
 
